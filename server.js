@@ -1,5 +1,8 @@
 "use strict";
 
+// Cargar variables de entorno
+require('dotenv').config();
+
 // Imports
 const express = require("express");
 const session = require("express-session");
@@ -10,22 +13,22 @@ var cons = require('consolidate');
 var path = require('path');
 let app = express();
 
-// Globals
-const OKTA_ISSUER_URI = "https://una-infosec.us.auth0.com/"
-const OKTA_CLIENT_ID = "ZnQGVDI8erbHsddQXMK5u7jwgtexXJZW";
-const OKTA_CLIENT_SECRET = "sAzIVlyCWHzrlm3mivVWoXzOcifJigMU_k13U-pUJzTEDvqrdnOLTRTNem7vZTwh";
-const REDIRECT_URI = "http://localhost:3000/dashboard";
+// Globals - usando variables de entorno
+const OKTA_ISSUER_URI = process.env.OKTA_ISSUER_URI;
+const OKTA_CLIENT_ID = process.env.OKTA_CLIENT_ID;
+const OKTA_CLIENT_SECRET = process.env.OKTA_CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 const PORT = process.env.PORT || "3000";
-const SECRET = "hjsadfghjakshdfg87sd8f76s8d7f68s7f632342ug44gg423636346f"; // Dejar el secret así como está.
+const SECRET = process.env.SECRET;
 
-//  Esto se los dará Okta.
+//  Configuración de Auth0 usando variables de entorno
 const config = {
   authRequired: false,
   auth0Logout: true,
-  secret: 'SECRET',
-  baseURL: 'http://localhost:3000',
-  clientID: 'ZnQGVDI8erbHsddQXMK5u7jwgtexXJZW',
-  issuerBaseURL: 'https://dev-eccojn6a0hw0aetl.us.auth0.com'
+  secret: process.env.AUTH0_SECRET,
+  baseURL: process.env.AUTH0_BASE_URL,
+  clientID: process.env.AUTH0_CLIENT_ID,
+  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL
 };
 
 let oidc = new ExpressOIDC({
