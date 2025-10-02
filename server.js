@@ -14,7 +14,7 @@ var path = require('path');
 let app = express();
 
 // Globals - usando variables de entorno
-const OKTA_ISSUER_URI = process.env.OKTA_ISSUER_URI;
+const OKTA_ISSUER_URI = process.env.AUTH0_BASE_URL ;
 const OKTA_CLIENT_ID = process.env.OKTA_CLIENT_ID;
 const OKTA_CLIENT_SECRET = process.env.OKTA_CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
